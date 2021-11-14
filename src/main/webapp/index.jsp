@@ -14,16 +14,16 @@
 </head>
 <body>
 	<h1>CODE Penmanship</h1>
-	<form action="" method="get">
+	<form name="code_form" action="showResult.jsp" method="post">
 		<div id="cont">
 			<label>언어 선택 : </label>
 			<input type="radio" name="lang" value="1" checked> <label>C /</label>
 			<input type="radio" name="lang" value="2"> <label>C++ /</label>
 			<input type="radio" name="lang" value="3"> <label>JAVA</label>
 		</div>
-		<textarea rows="20" cols="100"></textarea>
+		<textarea rows="20" cols="100" name="code_textarea" required></textarea>
 		<br><br>
-		<button type="button" class="btn btn-primary">제출</button>
+		<input type="submit" class="btn btn-primary" value="제출">
 	</form>
 </body>
 </html>
