@@ -1,4 +1,4 @@
-package parser.parserUtil;
+package parser.parserUtil.common;
 
 public class Parser_endSpace {
 	

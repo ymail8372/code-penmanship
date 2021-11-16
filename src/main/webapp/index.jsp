@@ -14,7 +14,7 @@
 </head>
 <body>
 	<h1>CODE Penmanship</h1>
-	<form name="code_form" action="showResult.jsp" method="post">
+	<form name="code_form" action="showResult.jsp">
 		<div id="cont">
 			<label>언어 선택 : </label>
 			<input type="radio" name="lang" value="1" checked> <label>C /</label>

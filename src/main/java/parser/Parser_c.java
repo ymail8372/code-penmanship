@@ -1,15 +1,19 @@
 package parser;
 
-import parser.parserUtil.*;
-import util.Util;
+import java.util.ArrayList;
+import parser.parserUtil.common.*;
 
 public class Parser_c{
 	
-	public static String[] parse(String code) {
-		String[] results = new String[2];
+	public ArrayList<String> parse(String code) {
+		ArrayList<String> results = new ArrayList<String>();
 		
-		results[0] = Parser_endSpace.getResult(code);
-		results[1] = Parser_equalSign.getResult(code);
+		results.add(Parser_endSpace.getResult(code));
+		results.add(Parser_equalSign.getResult(code));
+		results.add(Parser_while.getResult(code));
+		results.add(Parser_for.getResult(code));
+		results.add(Parser_if.getResult(code));
+		results.add(Parser_ifelse.getResult(code));
 		
 		return results;
 	}
