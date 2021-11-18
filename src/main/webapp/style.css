@@ -2,25 +2,36 @@
 
 body {
 	width: 100%;
-	background-image: url(./background.jpg);
-	font-family: 'Noto Sans Korean';
-	color : #f6f6f6;
+	font-family: 'Nanum Gothic', sans-serif;
+	color : #000;
+}
+
+#wrapper {
+	width: 1150px;
+	margin: 0 auto;
 }
 
 h1 {
-	width: 450px;
-	padding: 10px 0;
-	background: rgb(32, 35, 40);
-	border-radius: 5px;
 	text-align: center;
-	margin: 100px auto 50px auto;
-	color: #f6f6f6;
-	font-size: 50px;
-	font-weight: bolder;
+	margin: 50px auto;
+	font-size: 46px;
 }
 
-form {margin: 0 auto 50px auto; width: 80%; text-align: center;}
-form #cont {margin: 0 auto; width: 270px; padding: 0 5px; background: rgb(32, 35, 40); border-radius: 5px;}
-form #cont label {font-size: 18px; font-weight: bold;}
+.card {
+	display: block;
+	overflow: hidden;
+	position: relative;
+	border: 0px;
+	border-radius: 14px;
+	box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);
+}
 
-button {margin: 0 auto;}
+form {margin: 0px auto 50px auto; width: 80%; text-align: center;}
+form #cont1 {width: 300px; margin: 10px auto; padding: 5px;}
+form #cont1 label {font-size: 18px; font-weight: bold;}
+
+form #cont2 textarea {width: 100%;}
+
+form #cont3 {text-align: center;}
+form #cont3 input {border-radius: 14px; box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);}
+

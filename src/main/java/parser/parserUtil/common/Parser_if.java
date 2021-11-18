@@ -14,9 +14,6 @@ public class Parser_if {
 		String[] lines = Util.splitCode(code);
 		
 		for (int i = 0; i < lines.length; i ++) {
-//			if (Util.check_comment(lines[i])) {
-//				break;
-//			}
 			if(lines[i].contains("if")) {
 				ArrayList<Integer> indexes = Util.findIndexes("if", lines[i]);
 				for (int j = 0; j < indexes.size(); j ++) {
@@ -40,5 +37,5 @@ public class Parser_if {
 		
 		return result;
 	}
-
+	
 }

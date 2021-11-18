@@ -17,7 +17,6 @@ public class Parser_equalSign {
 //				break;
 //			}
 			if (lines[i].contains("=") && !lines[i].contains("==")) {
-				
 				ArrayList<Integer> indexes = Util.findIndexes("=", lines[i]);
 				
 				for(int j = 0; j < indexes.size(); j ++) {

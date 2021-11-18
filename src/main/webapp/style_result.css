@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+body {
+	width: 100%;
+	font-family: 'Nanum Gothic', sans-serif;
+	color : #000;
+}
+
+#wrapper {
+	width: 1150px;
+	margin: 0 auto;
+}
+
+h1 {
+	text-align: left;
+	margin: 50px auto;
+	font-size: 46px;
+}
+
+.card {
+	float: left;
+	display: block;
+	overflow: hidden;
+	position: relative;
+	border: 0px;
+	border-radius: 14px;
+	box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);
+	width: 90%;
+	margin: 15px 5%;
+}
+
+.half {
+	width: 50%;
+	float: left;
+	margin-bottom: 20px;
+}
+
+.cont {
+	margin: 10px;
+}
+
+.cont p .color {
+	color: #F15F5F;
+}
+
+.cont .title {
+	font-size: 20px;
+	border-bottom: 1px solid #bbb;
+}
+

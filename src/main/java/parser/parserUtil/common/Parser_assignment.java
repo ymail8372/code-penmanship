@@ -1,6 +1,6 @@
 package parser.parserUtil.common;
 
-public class Parser_endSpace {
+public class Parser_assignment {
 	
 	public static String getResult(String code) {
 		int result = 0;
