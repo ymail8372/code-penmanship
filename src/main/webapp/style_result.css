@@ -58,13 +58,33 @@ h2 {
 }
 
 table {
-	border: 1px solid #bbb;
+	width: 100%;
 }
 
 table th {
-	border: 1px solid #bbb;
+	background-color: rgb(253, 240, 192);
+	text-align: center;
+	width: 12.5%;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #999;
+	font-size: 16px;
+}
+
+table th:last-child {
+	border-right: 0;
 }
 
 table td {
-	border: 1px solid #bbb;
+	text-align: center;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #999;
+	padding: 10px 0;
+}
+
+table tr:last-child td {
+	border-bottom: 0;
+}
+
+.final {
+	margin-bottom: 50px;
 }

@@ -79,6 +79,7 @@
 						<p> <% 
 						}
 						else {
+							resultsForTable.add("3");
 							out.print("while문을 사용하지 않았습니다.");
 						} %> </p>
 					</div>
@@ -115,6 +116,7 @@
 						<p> <% 
 						}
 						else {
+							resultsForTable.add("3");
 							out.print("if문을 사용하지 않았습니다.");
 						} %> </p>
 					</div>
@@ -175,6 +177,7 @@
 						<p> <% 
 						}
 						else {
+							resultsForTable.add("3");
 							out.print("\"%\" 연산자를 사용하지 않았습니다.");
 						} %> </p>
 					</div>
@@ -211,6 +214,7 @@
 						<p> <% 
 						}
 						else {
+							resultsForTable.add("3");
 							out.print("if문을 사용하지 않았습니다.");
 						} %> </p>
 						else {
@@ -250,6 +254,7 @@
 						<p> <% 
 						}
 						else {
+							resultsForTable.add("3");
 							out.print("\"==\" 연산자를 사용하지 않았습니다.");
 						} %> </p>
 					</div>
@@ -288,6 +293,7 @@
 						<p> <% 
 						}
 						else {
+							resultsForTable.add("3");
 							out.print("\"=\" 연산자를 사용하지 않았습니다.");
 						} %> </p>
 					</div>
@@ -324,6 +330,7 @@
 						<p> <% 
 						}
 						else {
+							resultsForTable.add("3");
 							out.print("for문을 사용하지 않았습니다.");
 						} %> </p>
 					</div>
@@ -360,6 +367,7 @@
 						<p> <% 
 						}
 						else {
+							resultsForTable.add("3");
 							out.print("if else문을 사용하지 않았습니다.");
 						} %> </p>
 					</div>
@@ -396,6 +404,7 @@
 						<p> <% 
 						}
 						else {
+							resultsForTable.add("3");
 							out.print("사칙연산 연산자를 사용하지 않았습니다.");
 						} %> </p>
 					</div>
@@ -432,6 +441,7 @@
 						<p> <% 
 						}
 						else {
+							resultsForTable.add("3");
 							out.print("비교 연산자를 사용하지 않았습니다.");
 						} %> </p>
 					</div>
@@ -468,6 +478,7 @@
 						<p> <% 
 						}
 						else {
+							resultsForTable.add("3");
 							out.print("증감 연산자를 사용하지 않았습니다.");
 						} %> </p>
 					</div>
@@ -509,6 +520,7 @@
 						<p> <% 
 						}
 						else {
+							resultsForTable.add("3");
 							out.print("printf문을 사용하지 않았습니다.");
 						} %> </p>
 					</div>
@@ -547,6 +559,7 @@
 						<p> <% 
 						}
 						else {
+							resultsForTable.add("3");
 							out.print("scanf문을 사용하지 않았습니다.");
 						} %> </p>
 					</div>
@@ -554,11 +567,47 @@
 			</div>
 		</div>
 		<h2>정리</h2>
-		<div class="card c">
+		<div class="card c final">
 			<table>
 				<tr>
-				<th>마지막 빈 라인</th><th>"=" 연산자</th><th>while문</th><th>if문</th><th>들여쓰기</th><th>"%" 연산자</th><th>논리 연산자( &&, || )</th>
-				<th>"==" 연산자</th><th>"=" 연산자</th><th>for문</th><th>if else문</th><th>사칙연산 연산자( +, -, *, / )</th><th>비교 연산자( <, >, <=, >= )</th><th>증감 연산자( ++, -- )</th><th>printf문</th><th>scanf문</th>
+				<th>마지막 빈 라인</th><th>while문</th><th>if문</th><th>들여쓰기</th><th>"%" 연산자</th><th>논리 연산자<br>( &&, || )</th><th>"==" 연산자</th><th>"=" 연산자</th>
+				</tr>
+				<tr>
+				<% for (int i = 0; i < 8; i ++) {
+					if (resultsForTable.get(i).equals("1")) {
+						out.print("<td>🟢</td>");
+					}
+					else if (resultsForTable.get(i).equals("2")) {
+						out.print("<td>🟡</td>");
+					}
+					else if (resultsForTable.get(i).equals("0")) {
+						out.print("<td>🔴</td>");
+					}
+					else {
+						out.print("<td>❌</td>");
+					}
+				}
+				%>
+				</tr>
+				<tr>
+				<th>for문</th><th>if else문</th><th>사칙연산 연산자<br>( +, -, *, / )</th><th>비교 연산자<br>( &lt;, >, &lt;=, >= )</th><th>증감 연산자<br>( ++, -- )</th><th>printf문</th><th>scanf문</th><th> </th>
+				</tr>
+				<tr>
+				<% for (int i = 8; i < 15; i ++) {
+					if (resultsForTable.get(i).equals("1")) {
+						out.print("<td>🟢</td>");
+					}
+					else if (resultsForTable.get(i).equals("2")) {
+						out.print("<td>🟡</td>");
+					}
+					else if (resultsForTable.get(i).equals("0")) {
+						out.print("<td>🔴</td>");
+					}
+					else {
+						out.print("<td>❌</td>");
+					}
+				}
+				%>
 				</tr>
 			</table>
 		</div>
