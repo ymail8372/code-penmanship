@@ -12,23 +12,51 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
+<% String code = request.getParameter("code_textarea"); %>
+<% String lang = request.getParameter("lang"); %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	function display(value) {
+		if (value == 1) {
+			$('.cpp').css("display", "none");
+			$('.java').css("display", "none");
+		}
+		else if (value == 2) {
+			$('.c').css("display", "none");
+			$('.java').css("display", "none");
+		}
+		else {
+			$('.c').css("display", "none");
+			$('.cpp').css("display", "none");
+		}
+	}
+
+	$(document).ready(function() {
+	var num = "<%=Integer.parseInt(lang)%>";
+		display(num);
+	});
+</script>
 </head>
 <body>
-	<jsp:useBean id="parser" class="parser.Parser_c"/>
-	<% String code = request.getParameter("code_textarea"); %>
-	<% String lang = request.getParameter("lang"); %>
+	<jsp:useBean id="parser_common" class="parser.Parser_common"/>
+	<jsp:useBean id="parser_c" class="parser.Parser_c"/>
+	<jsp:useBean id="parser_cpp" class="parser.Parser_cpp"/>
+	<jsp:useBean id="parser_java" class="parser.Parser_java"/>
+	<% ArrayList<String> results_common = parser_common.parse(code); %>
+	<% ArrayList<String> results_c = parser_c.parse(code); %>
+	<% ArrayList<String> results_cpp = parser_cpp.parse(code); %>
+	<%-- <% ArrayList<String> results_java = parser_java.parse(code); %> --%>
 	<% ArrayList<String> resultsForTable = new ArrayList<String>(); %>
 	<div id="wrapper">
 		<h1>✏️ 분석 결과</h1>
+		<div class="whole common">
 		<h2>공통 요소</h2>
-		<div class="whole">
 			<div class="half">
-				<div class="card common">
+				<div class="card">
 					<div class="cont">
 						<p class="title">⚙️ 마지막 빈 라인 여부</p>
 						<p> <% 
-						ArrayList<String> results = parser.parse(code);
-						if (results.get(0).equals("1")) {
+						if (results_common.get(0).equals("1")) {
 							out.print("코드의 마지막에 빈 라인이 있습니다.");
 						}
 						else {
@@ -36,7 +64,7 @@
 						}
 						%> </p> 
 						<p> <% 
-						if (results.get(0).equals("1")) {
+						if (results_common.get(0).equals("1")) {
 							resultsForTable.add("1");
 							out.print("결과 : 🟢");
 						}
@@ -47,12 +75,12 @@
 						%> </p>
 					</div>
 				</div>
-				<div class="card common">
+				<div class="card">
 					<div class="cont">
 						<p class="title">🖼 while문</p>
 						<p> <% 
-						int total_while = Integer.valueOf(results.get(2).split(" ")[0]);
-						int space_while = Integer.valueOf(results.get(2).split(" ")[1]);
+						int total_while = Integer.valueOf(results_common.get(2).split(" ")[0]);
+						int space_while = Integer.valueOf(results_common.get(2).split(" ")[1]);
 						if (total_while != 0) {
 							double percent_while = (double)space_while / total_while * 100;
 							
@@ -84,12 +112,12 @@
 						} %> </p>
 					</div>
 				</div>
-				<div class="card common">
+				<div class="card">
 					<div class="cont">
 						<p class="title">🖼 if문</p>
 						<p> <% 
-						int total_if = Integer.valueOf(results.get(4).split(" ")[0]);
-						int space_if = Integer.valueOf(results.get(4).split(" ")[1]);
+						int total_if = Integer.valueOf(results_common.get(4).split(" ")[0]);
+						int space_if = Integer.valueOf(results_common.get(4).split(" ")[1]);
 						if (total_if != 0) {
 							double percent_if = (double)space_if / total_if * 100;
 						
@@ -121,36 +149,36 @@
 						} %> </p>
 					</div>
 				</div>
-				<div class="card common">
+				<div class="card">
 					<div class="cont">
 						<p class="title">⚙️ 들여쓰기</p>
 						<p> <% 
-						if (results.get(6).length() == 1) {
+						if (results_common.get(6).length() == 1) {
 							out.print("<span class=\"color\">Tab</span>을 이용한 들여쓰기를 사용합니다.");
 						}
 						else {
-							int space_blank = Integer.valueOf(results.get(6).split(" ")[1]);
+							int space_blank = Integer.valueOf(results_common.get(6).split(" ")[1]);
 							
 							out.print("<span class=\"color\">space</span>를 이용한 들여쓰기를 사용하고, <span class=\"color\">" + space_blank + "</span>개의 space를 사용합니다.");
 						} %> </p>
 							<p> <% 
-							if (results.get(6).length() == 1) {
+							if (results_common.get(6).length() == 1) {
 								resultsForTable.add("1");
 								out.print("결과 : 🟢");
 							}
 							else {
 								resultsForTable.add("0");
-								out.print("결과 : 🔴 " + "(" + Integer.valueOf(results.get(6).split(" ")[1]) + ")");
+								out.print("결과 : 🔴 " + "(" + Integer.valueOf(results_common.get(6).split(" ")[1]) + ")");
 							}
 							%> </p>
 					</div>
 				</div>
-				<div class="card common">
+				<div class="card">
 					<div class="cont">
 						<p class="title">➕ "%" 연산자</p>
 						<p> <% 
-						int total_remainder = Integer.valueOf(results.get(8).split(" ")[0]);
-						int space_remainder = Integer.valueOf(results.get(8).split(" ")[1]);
+						int total_remainder = Integer.valueOf(results_common.get(8).split(" ")[0]);
+						int space_remainder = Integer.valueOf(results_common.get(8).split(" ")[1]);
 						if (total_remainder != 0) {
 							double percent_remainder = (double)space_remainder / total_remainder * 100;
 							
@@ -182,12 +210,12 @@
 						} %> </p>
 					</div>
 				</div>
-				<div class="card common">
+				<div class="card">
 					<div class="cont">
 						<p class="title">➕ 논리 연산자( &&, || )</p>
 						<p> <% 
-						int total_logical = Integer.valueOf(results.get(11).split(" ")[0]);
-						int space_logical = Integer.valueOf(results.get(11).split(" ")[1]);
+						int total_logical = Integer.valueOf(results_common.get(11).split(" ")[0]);
+						int space_logical = Integer.valueOf(results_common.get(11).split(" ")[1]);
 						if (total_logical != 0) {
 							double percent_logical = (double)space_logical / total_logical * 100;
 							
@@ -222,12 +250,12 @@
 						} %> </p>
 					</div>
 				</div>
-				<div class="card common">
+				<div class="card">
 					<div class="cont">
 						<p class="title">➕ "==" 연산자</p>
 						<p> <% 
-						int total_equal = Integer.valueOf(results.get(13).split(" ")[0]);
-						int space_equal = Integer.valueOf(results.get(13).split(" ")[1]);
+						int total_equal = Integer.valueOf(results_common.get(13).split(" ")[0]);
+						int space_equal = Integer.valueOf(results_common.get(13).split(" ")[1]);
 						if (total_equal != 0) {
 							double percent_equal = (double)space_equal / total_equal * 100;
 							
@@ -261,12 +289,12 @@
 				</div>
 			</div>
 			<div class="half">
-				<div class="card common">
+				<div class="card">
 					<div class="cont">
 						<p class="title">➕ "=" 연산자</p>
 						<p> <% 
-						int total_equalsign = Integer.valueOf(results.get(1).split(" ")[0]);
-						int space_equalsign = Integer.valueOf(results.get(1).split(" ")[1]);
+						int total_equalsign = Integer.valueOf(results_common.get(1).split(" ")[0]);
+						int space_equalsign = Integer.valueOf(results_common.get(1).split(" ")[1]);
 						if (total_equalsign != 0) {
 							double percent_equalsign = (double)space_equalsign / total_equalsign * 100;
 						
@@ -298,12 +326,12 @@
 						} %> </p>
 					</div>
 				</div>
-				<div class="card common">
+				<div class="card">
 					<div class="cont">
 						<p class="title">🖼 for문</p>
 						<p> <% 
-						int total_for = Integer.valueOf(results.get(3).split(" ")[0]);
-						int space_for = Integer.valueOf(results.get(3).split(" ")[1]);
+						int total_for = Integer.valueOf(results_common.get(3).split(" ")[0]);
+						int space_for = Integer.valueOf(results_common.get(3).split(" ")[1]);
 						if (total_for != 0) {
 							double percent_for = (double)space_for / total_for * 100;
 							
@@ -335,12 +363,12 @@
 						} %> </p>
 					</div>
 				</div>
-				<div class="card common">
+				<div class="card">
 					<div class="cont">
 						<p class="title">🖼 if else문</p>
 						<p> <% 
-						int total_ifelse = Integer.valueOf(results.get(5).split(" ")[0]);
-						int space_ifelse = Integer.valueOf(results.get(5).split(" ")[1]);
+						int total_ifelse = Integer.valueOf(results_common.get(5).split(" ")[0]);
+						int space_ifelse = Integer.valueOf(results_common.get(5).split(" ")[1]);
 						if (total_ifelse != 0) {
 							double percent_ifelse = (double)space_ifelse / total_ifelse * 100;
 							
@@ -372,12 +400,12 @@
 						} %> </p>
 					</div>
 				</div>
-				<div class="card common">
+				<div class="card">
 					<div class="cont">
 						<p class="title">사칙연산 연산자( +, -, *, / )</p>
 						<p> <% 
-						int total_four = Integer.valueOf(results.get(7).split(" ")[0]);
-						int space_four = Integer.valueOf(results.get(7).split(" ")[1]);
+						int total_four = Integer.valueOf(results_common.get(7).split(" ")[0]);
+						int space_four = Integer.valueOf(results_common.get(7).split(" ")[1]);
 						if (total_four != 0) {
 							double percent_four = (double)space_four / total_four * 100;
 							
@@ -409,12 +437,12 @@
 						} %> </p>
 					</div>
 				</div>
-				<div class="card common">
+				<div class="card">
 					<div class="cont">
 						<p class="title">➕ 비교 연산자( &lt;, >, &lt;=, >= )</p>
 						<p> <% 
-						int total_comparison = Integer.valueOf(results.get(9).split(" ")[0]) + Integer.valueOf(results.get(10).split(" ")[0]);
-						int space_comparison = Integer.valueOf(results.get(9).split(" ")[1]) + Integer.valueOf(results.get(10).split(" ")[1]);
+						int total_comparison = Integer.valueOf(results_common.get(9).split(" ")[0]) + Integer.valueOf(results_common.get(10).split(" ")[0]);
+						int space_comparison = Integer.valueOf(results_common.get(9).split(" ")[1]) + Integer.valueOf(results_common.get(10).split(" ")[1]);
 						if (total_comparison != 0) {
 							double percent_comparison = (double)space_comparison / total_comparison * 100;
 							
@@ -446,12 +474,12 @@
 						} %> </p>
 					</div>
 				</div>
-				<div class="card common">
+				<div class="card">
 					<div class="cont">
 						<p class="title">➕ 증감 연산자( ++, -- )</p>
 						<p> <% 
-						int total_increment = Integer.valueOf(results.get(12).split(" ")[0]);
-						int space_increment = Integer.valueOf(results.get(12).split(" ")[1]);
+						int total_increment = Integer.valueOf(results_common.get(12).split(" ")[0]);
+						int space_increment = Integer.valueOf(results_common.get(12).split(" ")[1]);
 						if (total_increment != 0) {
 							double percent_increment = (double)space_increment / total_increment * 100;
 							
@@ -485,15 +513,15 @@
 				</div>
 			</div>
 		</div>
-		<h2>C 언어 전용</h2>
-		<div class="whole">
+		<div class="whole c">
+		<h2>C 전용 요소</h2>
 			<div class="half">
-				<div class="card c">
+				<div class="card">
 					<div class="cont">
 						<p class="title">🖼 printf문</p>
 						<p> <% 
-						int total_printf = Integer.valueOf(results.get(14).split(" ")[0]);
-						int space_printf = Integer.valueOf(results.get(14).split(" ")[1]);
+						int total_printf = Integer.valueOf(results_c.get(0).split(" ")[0]);
+						int space_printf = Integer.valueOf(results_c.get(0).split(" ")[1]);
 						if (total_printf != 0) {
 							double percent_printf = (double)space_printf / total_printf * 100;
 							
@@ -527,12 +555,12 @@
 				</div>
 			</div>
 			<div class="half">
-				<div class="card c">
+				<div class="card">
 					<div class="cont">
 						<p class="title">🖼 scanf문</p>
 						<p> <% 
-						int total_scanf = Integer.valueOf(results.get(14).split(" ")[0]);
-						int space_scanf = Integer.valueOf(results.get(14).split(" ")[1]);
+						int total_scanf = Integer.valueOf(results_c.get(1).split(" ")[0]);
+						int space_scanf = Integer.valueOf(results_c.get(1).split(" ")[1]);
 						if (total_scanf != 0) {
 							double percent_scanf = (double)space_scanf / total_scanf * 100;
 							
@@ -566,12 +594,63 @@
 				</div>
 			</div>
 		</div>
+		<div class="whole cpp">
+		<h2>C++ 전용 요소</h2>
+			<div class="half">
+				<div class="card">
+					<div class="cont">
+						<p class="title">🖼 쉬프트 연산자( &lt;&lt;, >> )</p>
+						<p> <% 
+						int total_operator_shift = Integer.valueOf(results_cpp.get(0).split(" ")[0]);
+						int space_operator_shift = Integer.valueOf(results_cpp.get(0).split(" ")[1]);
+						if (total_operator_shift != 0) {
+							double percent_operator_shift = (double)space_operator_shift / total_operator_shift * 100;
+							
+							out.print("총 사용 횟수 : <span class=\"color\">" + total_operator_shift + "</span><br>");
+							out.print("쉬프트 연산자 양 옆에 빈칸이 있는 경우 : <span class=\"color\">" + space_operator_shift + "</span><br>");
+							%> </p>
+							<p> <%
+							out.print("쉬프트 연산자를 총 <span class=\"color\">" + total_operator_shift + "</span>번 사용하였고, 쉬프트 연산자 양 옆에 빈칸이 있는 경우는 <span class=\"color\">" + space_operator_shift + "</span>번으로, <span class=\"color\">" + String.format("%.2f", percent_operator_shift) + "%</span>의 비율입니다.");
+							%> </p> 
+							<p> <% 
+							if (percent_operator_shift >= 70) {
+								resultsForTable.add("1");
+								out.print("결과 : 🟢");
+							}
+							else if (percent_operator_shift >= 30) {
+								resultsForTable.add("2");
+								out.print("결과 : 🟡");
+							}
+							else {
+								resultsForTable.add("0");
+								out.print("결과 : 🔴");
+							}
+							%> </p>
+						<p> <% 
+						}
+						else {
+							resultsForTable.add("3");
+							out.print("쉬프트 연산자를 사용하지 않았습니다.");
+						} %> </p>
+					</div>
+				</div>
+			</div>
+			<div class="half">
+				
+			</div>
+		</div>
+		<div class="whole java">
+			<div class="half">
+				
+			</div>
+			<div class="half">
+				
+			</div>
+		</div>
 		<h2>정리</h2>
 		<div class="card c final">
 			<table>
-				<tr>
-				<th>마지막 빈 라인</th><th>while문</th><th>if문</th><th>들여쓰기</th><th>"%" 연산자</th><th>논리 연산자<br>( &&, || )</th><th>"==" 연산자</th><th>"=" 연산자</th>
-				</tr>
+				<tr><th>마지막 빈 라인</th><th>while문</th><th>if문</th><th>들여쓰기</th><th>"%" 연산자</th><th>논리 연산자<br>( &&, || )</th><th>"==" 연산자</th><th>"=" 연산자</th></tr>
 				<tr>
 				<% for (int i = 0; i < 8; i ++) {
 					if (resultsForTable.get(i).equals("1")) {
@@ -589,11 +668,63 @@
 				}
 				%>
 				</tr>
-				<tr>
-				<th>for문</th><th>if else문</th><th>사칙연산 연산자<br>( +, -, *, / )</th><th>비교 연산자<br>( &lt;, >, &lt;=, >= )</th><th>증감 연산자<br>( ++, -- )</th><th>printf문</th><th>scanf문</th><th> </th>
-				</tr>
+				<tr><th>for문</th><th>if else문</th><th>사칙연산 연산자<br>( +, -, *, / )</th><th>비교 연산자<br>( &lt;, >, &lt;=, >= )</th><th>증감 연산자<br>( ++, -- )</th><th>printf문</th><th>scanf문</th><th> </th></tr>
 				<tr>
 				<% for (int i = 8; i < 15; i ++) {
+					if (resultsForTable.get(i).equals("1")) {
+						out.print("<td>🟢</td>");
+					}
+					else if (resultsForTable.get(i).equals("2")) {
+						out.print("<td>🟡</td>");
+					}
+					else if (resultsForTable.get(i).equals("0")) {
+						out.print("<td>🔴</td>");
+					}
+					else {
+						out.print("<td>❌</td>");
+					}
+				}
+				%>
+				</tr>
+			</table>
+		</div>
+		<div class="card cpp final">
+			<table>
+				<tr><th>마지막 빈 라인</th><th>while문</th><th>if문</th><th>들여쓰기</th><th>"%" 연산자</th><th>논리 연산자<br>( &&, || )</th><th>"==" 연산자</th><th>"=" 연산자</th></tr>
+				<tr>
+				<% for (int i = 0; i < 8; i ++) {
+					if (resultsForTable.get(i).equals("1")) {
+						out.print("<td>🟢</td>");
+					}
+					else if (resultsForTable.get(i).equals("2")) {
+						out.print("<td>🟡</td>");
+					}
+					else if (resultsForTable.get(i).equals("0")) {
+						out.print("<td>🔴</td>");
+					}
+					else {
+						out.print("<td>❌</td>");
+					}
+				}
+				%>
+				</tr>
+				<tr><th>for문</th><th>if else문</th><th>사칙연산 연산자<br>( +, -, *, / )</th><th>비교 연산자<br>( &lt;, >, &lt;=, >= )</th><th>증감 연산자<br>( ++, -- )</th><th>쉬프트 연산자<br>( &lt;&lt;, >>)</th><th> </th><th> </th></tr>
+				<tr>
+				<% for (int i = 8; i < 13; i ++) {
+					if (resultsForTable.get(i).equals("1")) {
+						out.print("<td>🟢</td>");
+					}
+					else if (resultsForTable.get(i).equals("2")) {
+						out.print("<td>🟡</td>");
+					}
+					else if (resultsForTable.get(i).equals("0")) {
+						out.print("<td>🔴</td>");
+					}
+					else {
+						out.print("<td>❌</td>");
+					}
+				}
+				for (int i = 15; i < 16; i ++) {
 					if (resultsForTable.get(i).equals("1")) {
 						out.print("<td>🟢</td>");
 					}

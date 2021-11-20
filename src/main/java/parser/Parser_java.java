@@ -1,9 +1,12 @@
 package parser;
 
+import java.util.ArrayList;
+import parser.parserUtil.java.*;
+
 public class Parser_java {
 
-	public static int[] parse(String code) {
-		int[] results = null;
+	public ArrayList<String> parse(String code) {
+		ArrayList<String> results = new ArrayList<String>();
 		
 		return results;
 	}
