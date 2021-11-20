@@ -166,7 +166,7 @@
 								out.print("결과 : 🟢");
 							}
 							else {
-								resultsForTable.add("0");
+								resultsForTable.add("0 " + results_common.get(6).split(" ")[1]);
 								out.print("결과 : 🔴 " + "(" + Integer.valueOf(results_common.get(6).split(" ")[1]) + ")");
 							}
 							%> </p>
@@ -243,9 +243,6 @@
 						else {
 							resultsForTable.add("3");
 							out.print("if문을 사용하지 않았습니다.");
-						} %> </p>
-						else {
-							out.print("논리 연산자를 사용하지 않았습니다.");
 						} %> </p>
 					</div>
 				</div>
@@ -689,7 +686,27 @@
 			<table>
 				<tr><th>마지막 빈 라인</th><th>while문</th><th>if문</th><th>들여쓰기</th><th>"%" 연산자</th><th>논리 연산자<br>( &&, || )</th><th>"==" 연산자</th><th>"=" 연산자</th></tr>
 				<tr>
-				<% for (int i = 0; i < 8; i ++) {
+				<% for (int i = 0; i < 3; i ++) {
+					if (resultsForTable.get(i).equals("1")) {
+						out.print("<td>🟢</td>");
+					}
+					else if (resultsForTable.get(i).equals("2")) {
+						out.print("<td>🟡</td>");
+					}
+					else if (resultsForTable.get(i).equals("0")) {
+						out.print("<td>🔴</td>");
+					}
+					else {
+						out.print("<td>❌</td>");
+					}
+				}
+				if (resultsForTable.get(3).equals("1")) {
+					out.print("<td>🟢</td>");
+				}
+				else {
+					out.print("<td>🔴 (" + resultsForTable.get(3).split(" ")[1] + ")</td>");
+				}
+				for (int i = 4; i < 8; i ++) {
 					if (resultsForTable.get(i).equals("1")) {
 						out.print("<td>🟢</td>");
 					}
@@ -729,7 +746,27 @@
 			<table>
 				<tr><th>마지막 빈 라인</th><th>while문</th><th>if문</th><th>들여쓰기</th><th>"%" 연산자</th><th>논리 연산자<br>( &&, || )</th><th>"==" 연산자</th><th>"=" 연산자</th></tr>
 				<tr>
-				<% for (int i = 0; i < 8; i ++) {
+				<% for (int i = 0; i < 3; i ++) {
+					if (resultsForTable.get(i).equals("1")) {
+						out.print("<td>🟢</td>");
+					}
+					else if (resultsForTable.get(i).equals("2")) {
+						out.print("<td>🟡</td>");
+					}
+					else if (resultsForTable.get(i).equals("0")) {
+						out.print("<td>🔴</td>");
+					}
+					else {
+						out.print("<td>❌</td>");
+					}
+				}
+				if (resultsForTable.get(3).equals("1")) {
+					out.print("<td>🟢</td>");
+				}
+				else {
+					out.print("<td>🔴 (" + resultsForTable.get(3).split(" ")[1] + ")</td>");
+				}
+				for (int i = 4; i < 8; i ++) {
 					if (resultsForTable.get(i).equals("1")) {
 						out.print("<td>🟢</td>");
 					}
@@ -783,7 +820,27 @@
 			<table>
 				<tr><th>마지막 빈 라인</th><th>while문</th><th>if문</th><th>들여쓰기</th><th>"%" 연산자</th><th>논리 연산자<br>( &&, || )</th><th>"==" 연산자</th><th>"=" 연산자</th></tr>
 				<tr>
-				<% for (int i = 0; i < 8; i ++) {
+				<% for (int i = 0; i < 3; i ++) {
+					if (resultsForTable.get(i).equals("1")) {
+						out.print("<td>🟢</td>");
+					}
+					else if (resultsForTable.get(i).equals("2")) {
+						out.print("<td>🟡</td>");
+					}
+					else if (resultsForTable.get(i).equals("0")) {
+						out.print("<td>🔴</td>");
+					}
+					else {
+						out.print("<td>❌</td>");
+					}
+				}
+				if (resultsForTable.get(3).equals("1")) {
+					out.print("<td>🟢</td>");
+				}
+				else {
+					out.print("<td>🔴 (" + resultsForTable.get(3).split(" ")[1] + ")</td>");
+				}
+				for (int i = 4; i < 8; i ++) {
 					if (resultsForTable.get(i).equals("1")) {
 						out.print("<td>🟢</td>");
 					}

@@ -5,6 +5,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="/Users/kimminseok/Documents/apache-tomcat-9.0.54/lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="/Users/kimminseok/Documents/apache-tomcat-9.0.54/lib/servlet-api.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java [1.8.271.09]"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
