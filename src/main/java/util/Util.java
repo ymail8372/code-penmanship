@@ -33,17 +33,6 @@ public class Util {
 		return check;
 	}
 	
-//	public static boolean check_comment(String line) {
-//		
-//		boolean check = false;
-//		
-//		if (line.contains("//")) {
-//			check = true;
-//		}
-//		
-//		return check;
-//	}
-	
 	public static ArrayList<Integer> findIndexes(String findword, String code) {
 		ArrayList<Integer> indexes = new ArrayList<Integer>();
 		int index = code.indexOf(findword);

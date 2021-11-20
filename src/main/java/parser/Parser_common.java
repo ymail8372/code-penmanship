@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import parser.parserUtil.common.*;
 
 public class Parser_common {
+	private ArrayList<String> results = new ArrayList<String>();
 	
 	public ArrayList<String> parse(String code) {
-		ArrayList<String> results = new ArrayList<String>();
 		
 		results.add(Parser_assignment.getResult(code)); // 0
 		results.add(Parser_equalSign.getResult(code)); // 1

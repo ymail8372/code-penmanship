@@ -45,7 +45,6 @@
 	<% ArrayList<String> results_common = parser_common.parse(code); %>
 	<% ArrayList<String> results_c = parser_c.parse(code); %>
 	<% ArrayList<String> results_cpp = parser_cpp.parse(code); %>
-	<%-- <% ArrayList<String> results_java = parser_java.parse(code); %> --%>
 	<% ArrayList<String> resultsForTable = new ArrayList<String>(); %>
 	<div id="wrapper">
 		<h1>✏️ 분석 결과</h1>
@@ -599,7 +598,7 @@
 			<div class="half">
 				<div class="card">
 					<div class="cont">
-						<p class="title">🖼 쉬프트 연산자( &lt;&lt;, >> )</p>
+						<p class="title">➕ 쉬프트 연산자( &lt;&lt;, >> )</p>
 						<p> <% 
 						int total_operator_shift = Integer.valueOf(results_cpp.get(0).split(" ")[0]);
 						int space_operator_shift = Integer.valueOf(results_cpp.get(0).split(" ")[1]);
@@ -636,7 +635,45 @@
 				</div>
 			</div>
 			<div class="half">
-				
+				<div class="card">
+					<div class="cont">
+						<p class="title">⚙️ 개행 문자</p>
+						<p> <% 
+						int total_newLine = Integer.valueOf(results_cpp.get(0).split(" ")[0]);
+						int endl = Integer.valueOf(results_cpp.get(0).split(" ")[1]);
+						int newLine = total_newLine - endl;
+						if (total_newLine != 0) {
+							double percent_newLine = (double)endl / total_newLine * 100;
+							
+							out.print("총 사용 횟수 : <span class=\"color\">" + total_newLine + "</span><br>");
+							out.print("endl을 사용하는  경우 : <span class=\"color\">" + endl + "</span><br>");
+							out.print("\\n을 사용하는 경우 : <span class=\"color\">" + newLine + "</span><br>");
+							%> </p>
+							<p> <%
+							out.print("개행 문자를 총 <span class=\"color\">" + total_newLine + "</span>번 사용하였고, endl을 사용하는  경우는 <span class=\"color\">" + endl + "</span>번으로, <span class=\"color\">" + String.format("%.2f", percent_newLine) + "%</span>의 비율입니다.");
+							%> </p> 
+							<p> <% 
+							if (percent_newLine >= 70) {
+								resultsForTable.add("1");
+								out.print("결과 : 🟢");
+							}
+							else if (percent_newLine >= 30) {
+								resultsForTable.add("2");
+								out.print("결과 : 🟡");
+							}
+							else {
+								resultsForTable.add("0");
+								out.print("결과 : 🔴");
+							}
+							%> </p>
+						<p> <% 
+						}
+						else {
+							resultsForTable.add("3");
+							out.print("개행 문자를 사용하지 않았습니다.");
+						} %> </p>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="whole java">
@@ -708,7 +745,7 @@
 				}
 				%>
 				</tr>
-				<tr><th>for문</th><th>if else문</th><th>사칙연산 연산자<br>( +, -, *, / )</th><th>비교 연산자<br>( &lt;, >, &lt;=, >= )</th><th>증감 연산자<br>( ++, -- )</th><th>쉬프트 연산자<br>( &lt;&lt;, >>)</th><th> </th><th> </th></tr>
+				<tr><th>for문</th><th>if else문</th><th>사칙연산 연산자<br>( +, -, *, / )</th><th>비교 연산자<br>( &lt;, >, &lt;=, >= )</th><th>증감 연산자<br>( ++, -- )</th><th>쉬프트 연산자<br>( &lt;&lt;, >>)</th><th>개행 문자</th><th> </th></tr>
 				<tr>
 				<% for (int i = 8; i < 13; i ++) {
 					if (resultsForTable.get(i).equals("1")) {
@@ -724,7 +761,47 @@
 						out.print("<td>❌</td>");
 					}
 				}
-				for (int i = 15; i < 16; i ++) {
+				for (int i = 15; i < 17; i ++) {
+					if (resultsForTable.get(i).equals("1")) {
+						out.print("<td>🟢</td>");
+					}
+					else if (resultsForTable.get(i).equals("2")) {
+						out.print("<td>🟡</td>");
+					}
+					else if (resultsForTable.get(i).equals("0")) {
+						out.print("<td>🔴</td>");
+					}
+					else {
+						out.print("<td>❌</td>");
+					}
+				}
+				%>
+				</tr>
+			</table>
+		</div>
+		<div class="card java final">
+			<table>
+				<tr><th>마지막 빈 라인</th><th>while문</th><th>if문</th><th>들여쓰기</th><th>"%" 연산자</th><th>논리 연산자<br>( &&, || )</th><th>"==" 연산자</th><th>"=" 연산자</th></tr>
+				<tr>
+				<% for (int i = 0; i < 8; i ++) {
+					if (resultsForTable.get(i).equals("1")) {
+						out.print("<td>🟢</td>");
+					}
+					else if (resultsForTable.get(i).equals("2")) {
+						out.print("<td>🟡</td>");
+					}
+					else if (resultsForTable.get(i).equals("0")) {
+						out.print("<td>🔴</td>");
+					}
+					else {
+						out.print("<td>❌</td>");
+					}
+				}
+				%>
+				</tr>
+				<tr><th>for문</th><th>if else문</th><th>사칙연산 연산자<br>( +, -, *, / )</th><th>비교 연산자<br>( &lt;, >, &lt;=, >= )</th><th>증감 연산자<br>( ++, -- )</th><th> </th><th> </th><th> </th></tr>
+				<tr>
+				<% for (int i = 8; i < 13; i ++) {
 					if (resultsForTable.get(i).equals("1")) {
 						out.print("<td>🟢</td>");
 					}
